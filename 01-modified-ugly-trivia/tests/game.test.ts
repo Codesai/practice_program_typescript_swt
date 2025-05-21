@@ -95,9 +95,9 @@ describe('Ugly trivia', () => {
 });
 
 class GameForTesting extends Game {
+    log: string[];
     private _rollNumbers: number[];
     private _isWrongAnswers: boolean[];
-    log: string[];
 
     constructor(rollNumbers: number[], isWrongAnswers: boolean[]) {
         super();
