@@ -78,13 +78,18 @@ export class Game {
         }
     }
 
-    // Future: move to Player (not possible yet because of notify seam)
     private moveCurrentPlayerToNewPlaceAndAskQuestion(roll: number): void {
         const currentPlayer = this.getCurrentPlayer();
-        currentPlayer.move(roll);
-        this.notify(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace());
+        this.moveCurrentPlayer(currentPlayer, roll);
+
         this.notify("The category is " + this.currentCategory());
         this.askQuestion();
+    }
+
+    // Future: move to Player (not possible yet because of notify seam)
+    private moveCurrentPlayer(currentPlayer: Player, roll: number): void {
+        currentPlayer.move(roll);
+        this.notify(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace());
     }
 
     private getCurrentPlayer(): Player {
