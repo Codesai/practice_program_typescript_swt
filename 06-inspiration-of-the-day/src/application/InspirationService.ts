@@ -5,8 +5,9 @@ import {Random} from "../domain/Random";
 import {Quote} from "../domain/Quote";
 import {Employee} from "../domain/Employee";
 import {InvalidWordException} from "../domain/InvalidWordException";
+import {ForInspiring} from "../domain/ForInspiring";
 
-export class InspirationService {
+export class InspirationService implements ForInspiring {
     private readonly employeesRepository: EmployeesRepository;
     private readonly quotesGateway: QuotesGateway;
     private readonly quotesSender: QuotesSender;

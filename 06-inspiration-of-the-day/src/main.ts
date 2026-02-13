@@ -4,6 +4,8 @@ import {FetchQuotesGateway} from "./infrastructure/FetchQuotesGateway";
 import {SystemRandom} from "./infrastructure/SystemRandom";
 import {WhatsAppQuotesSender, WhatsAppQuotesSenderConfig} from "./infrastructure/WhatsAppQuotesSender";
 import {DbConnectionOptions} from "./infrastructure/DbConnectionOptions";
+import {InspirationController} from "./infrastructure/web/InspirationController";
+import {createInspirationApp} from "./infrastructure/web/app";
 
 const employeesRepository = new MariaDbEmployeesRepository(
     new DbConnectionOptions(
@@ -33,6 +35,10 @@ const inspirationService = new InspirationService(
     random
 );
 
-inspirationService.inspireSomeone("success")
-    .then(() => console.log("Inspiration sent!"))
-    .catch(error => console.error("Failed to send inspiration:", error));
+const inspirationController = new InspirationController(inspirationService);
+const app = createInspirationApp(inspirationController);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
