@@ -5,10 +5,10 @@ export interface QuotesGateway {
 }
 
 export class RetrievingQuotesError implements Error {
+    message: string;
+    name: string;
+
     constructor(message: string) {
         this.message = message;
     }
-
-    message: string;
-    name: string;
 }

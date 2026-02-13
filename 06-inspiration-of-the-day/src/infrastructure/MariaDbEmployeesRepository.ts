@@ -1,5 +1,5 @@
 import {Employee} from "../domain/Employee";
-import {GettingEmployeesError, EmployeesRepository} from "../domain/EmployeesRepository";
+import {EmployeesRepository, GettingEmployeesError} from "../domain/EmployeesRepository";
 import mysql, {RowDataPacket} from "mysql2/promise";
 import {DbConnectionOptions} from "./DbConnectionOptions";
 

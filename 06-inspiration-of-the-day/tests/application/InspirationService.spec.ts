@@ -31,9 +31,7 @@ describe('InspirationService', () => {
             quote("En un lugar de la mancha...", "Cervantes"),
             quote("el que a buen árbol...", "Anónimo Garcia"),
         ]);
-        random.nextInt
-            .mockReturnValueOnce(1)
-            .mockReturnValueOnce(0);
+        random.nextInt.mockReturnValueOnce(1).mockReturnValueOnce(0);
 
         await inspirationService.inspireSomeone("awesome");
 
@@ -43,11 +41,15 @@ describe('InspirationService', () => {
         );
     });
 
-    it.each(['', null, "'", "{", "}", "[", "}", "[", "[", "&", "€"])
-    ('invalid word "%s" throws exception informing the user', async (invalidWord: string) => {
-        await expect(inspirationService.inspireSomeone(invalidWord))
-                    .rejects.toThrow(InvalidWordException);
-    });
+    it.each(
+        ['', null, "'", "{", "}", "[", "}", "[", "[", "&", "€"]
+    )
+    ('should throw an exception informing the user when called with an invalid word ("%s")',
+        async (invalidWord: string) => {
+            await expect(inspirationService.inspireSomeone(invalidWord))
+                .rejects.toThrow(InvalidWordException);
+        }
+    );
 
     function employee(name: string, phoneNumber: string) {
         return new Employee(name, phoneNumber);
@@ -56,5 +58,4 @@ describe('InspirationService', () => {
     function quote(text: string, author: string) {
         return new Quote(text, author);
     }
-
 });

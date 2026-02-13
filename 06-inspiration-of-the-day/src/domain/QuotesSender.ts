@@ -7,13 +7,12 @@ export interface QuotesSender {
 
 export class SendingQuoteError implements Error {
     readonly error: Error;
+    message: string;
+    name: string;
 
     constructor(message: string, error: Error) {
         this.message = message;
         this.error = error;
 
     }
-
-    message: string;
-    name: string;
 }
