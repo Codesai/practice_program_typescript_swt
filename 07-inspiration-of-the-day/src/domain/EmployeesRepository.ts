@@ -6,3 +6,6 @@ export interface EmployeesRepository {
 
 export class GettingEmployeesError extends Error {
 }
+
+export class EmptyEmployeesError extends Error {
+}

@@ -1,13 +1,10 @@
-import {EmployeesRepository} from "../domain/EmployeesRepository";
-import {QuotesGateway} from "../domain/QuotesGateway";
+import {EmployeesRepository, EmptyEmployeesError} from "../domain/EmployeesRepository";
+import {EmptyQuotesError, QuotesGateway} from "../domain/QuotesGateway";
 import {QuotesSender} from "../domain/QuotesSender";
 import {Random} from "../domain/Random";
 import {Quote} from "../domain/Quote";
 import {Employee} from "../domain/Employee";
-import {InvalidWordException} from "../domain/InvalidWordException";
-import {ForInspiring} from "../domain/ForInspiring";
-import {EmptyQuotesException} from "../domain/EmptyQuotesException";
-import {EmptyEmployeesException} from "../domain/EmptyEmployeesException";
+import {ForInspiring, InvalidWordError} from "../domain/ForInspiring";
 
 export class InspirationService implements ForInspiring {
     private readonly employeesRepository: EmployeesRepository;
@@ -28,15 +25,15 @@ export class InspirationService implements ForInspiring {
     }
 
     async inspireSomeone(word: string): Promise<void> {
-        this.throwExceptionIfisInvalidWord(word);
+        this.throwExceptionIfIsInvalidWord(word);
         const quotes = await this.quotesGateway.findQuotesByWord(word);
         if (quotes.length === 0) {
-            throw new EmptyQuotesException();
+            throw new EmptyQuotesError();
         }
 
         const employees = await this.employeesRepository.getAll();
         if (employees.length === 0) {
-            throw new EmptyEmployeesException();
+            throw new EmptyEmployeesError();
         }
 
         const selectedQuote = this.selectRandomQuote(quotes);
@@ -45,10 +42,10 @@ export class InspirationService implements ForInspiring {
         await this.quotesSender.send(selectedEmployee, selectedQuote);
     }
 
-    private throwExceptionIfisInvalidWord(word: string) {
+    private throwExceptionIfIsInvalidWord(word: string): void {
         const specialCharacters = /['{}[\]&€]/;
         if (word === '' || word === null || specialCharacters.test(word)) {
-            throw new InvalidWordException(`"${word}" is invalid`);
+            throw new InvalidWordError(`"${word}" is invalid`);
         }
     }
 

@@ -10,3 +10,6 @@ export class RetrievingQuotesError extends Error {
         super(message);
     }
 }
+
+export class EmptyQuotesError extends Error {
+}

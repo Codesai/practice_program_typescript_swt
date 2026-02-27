@@ -1,13 +1,12 @@
-import {EmployeesRepository, GettingEmployeesError} from "../../src/domain/EmployeesRepository";
-import {QuotesGateway, RetrievingQuotesError} from "../../src/domain/QuotesGateway";
+import {EmployeesRepository, EmptyEmployeesError, GettingEmployeesError} from "../../src/domain/EmployeesRepository";
+import {EmptyQuotesError, QuotesGateway, RetrievingQuotesError} from "../../src/domain/QuotesGateway";
 import {QuotesSender, SendingQuoteError} from "../../src/domain/QuotesSender";
 import {Random} from "../../src/domain/Random";
 import {InspirationService} from "../../src/application/InspirationService";
 import {Employee} from "../../src/domain/Employee";
 import {Quote} from "../../src/domain/Quote";
-import {InvalidWordException} from "../../src/domain/InvalidWordException";
-import {EmptyQuotesException} from "../../src/domain/EmptyQuotesException";
-import {EmptyEmployeesException} from "../../src/domain/EmptyEmployeesException";
+
+import {InvalidWordError} from "../../src/domain/ForInspiring";
 
 describe('InspirationService', () => {
     let inspirationService: InspirationService;
@@ -49,7 +48,7 @@ describe('InspirationService', () => {
     ('should throw an exception informing the user when called with an invalid word ("%s")',
         async (invalidWord: string) => {
             await expect(inspirationService.inspireSomeone(invalidWord))
-                .rejects.toThrow(InvalidWordException);
+                .rejects.toThrow(InvalidWordError);
         }
     );
 
@@ -60,7 +59,7 @@ describe('InspirationService', () => {
         quotesGateway.findQuotesByWord.mockResolvedValueOnce([]);
 
         await expect(inspirationService.inspireSomeone("awesome"))
-            .rejects.toThrow(EmptyQuotesException);
+            .rejects.toThrow(EmptyQuotesError);
     });
 
     it('should throw an exception when quotes gateway fails', async () => {
@@ -82,7 +81,7 @@ describe('InspirationService', () => {
         ]);
 
         await expect(inspirationService.inspireSomeone("awesome"))
-            .rejects.toThrow(EmptyEmployeesException);
+            .rejects.toThrow(EmptyEmployeesError);
     })
 
     it('should throw an exception when employees repository fails', async () => {

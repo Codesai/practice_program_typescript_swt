@@ -1,6 +1,5 @@
 import {Request, Response} from 'express';
-import {InvalidWordException} from '../../domain/InvalidWordException';
-import {ForInspiring} from "../../domain/ForInspiring";
+import {ForInspiring, InvalidWordError} from "../../domain/ForInspiring";
 
 export class InspirationController {
     constructor(private readonly inspirationService: ForInspiring) {
@@ -13,7 +12,7 @@ export class InspirationController {
             await this.inspirationService.inspireSomeone(word);
             res.status(200).send({message: 'Inspiration sent!'});
         } catch (error) {
-            if (error instanceof InvalidWordException) {
+            if (error instanceof InvalidWordError) {
                 res.status(400).send({error: error.message});
             } else {
                 res.status(500).send({error: 'Internal Server Error'});
