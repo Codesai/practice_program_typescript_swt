@@ -11,7 +11,6 @@ then it randomly selects one quote from the list
 and sends it by WhatsApp to a random employee
 so that that employee gets inspired and motivated by the manager.
 
-
 ### Constraints
 
 The entry point of the service only has this public method: `inspireSomeone(word: string): void;`

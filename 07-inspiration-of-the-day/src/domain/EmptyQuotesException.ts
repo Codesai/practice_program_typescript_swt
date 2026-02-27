@@ -1,1 +1,2 @@
-export class EmptyQuotesException extends Error {}
+export class EmptyQuotesException extends Error {
+}

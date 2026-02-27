@@ -6,8 +6,8 @@ import {Quote} from "../domain/Quote";
 import {Employee} from "../domain/Employee";
 import {InvalidWordException} from "../domain/InvalidWordException";
 import {ForInspiring} from "../domain/ForInspiring";
-import { EmptyQuotesException } from "../domain/EmptyQuotesException";
-import { EmptyEmployeesException } from "../domain/EmptyEmployeesException";
+import {EmptyQuotesException} from "../domain/EmptyQuotesException";
+import {EmptyEmployeesException} from "../domain/EmptyEmployeesException";
 
 export class InspirationService implements ForInspiring {
     private readonly employeesRepository: EmployeesRepository;

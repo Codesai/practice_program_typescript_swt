@@ -1,5 +1,5 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-const transformIgnorePatterns =  {
+const transformIgnorePatterns = {
     transformIgnorePatterns: [
         "node_modules/(?!mariadb/)"
     ]
@@ -29,7 +29,7 @@ module.exports = {
             testMatch: [
                 '**/*.spec.ts',
             ],
-            testPathIgnorePatterns : ['<rootDir>/tests/infrastructure/integration/']
+            testPathIgnorePatterns: ['<rootDir>/tests/infrastructure/integration/']
         },
         {
             ...transformIgnorePatterns,

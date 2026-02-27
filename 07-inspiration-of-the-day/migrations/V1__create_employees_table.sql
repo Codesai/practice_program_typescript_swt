@@ -1,9 +1,9 @@
 CREATE TABLE employees
 (
     id      INT AUTO_INCREMENT NOT NULL,
-    name    VARCHAR(255)   NOT NULL,
-    phone   VARCHAR(20) NOT NULL,
-    retired BOOLEAN DEFAULT FALSE NOT NULL ,
+    name    VARCHAR(255)          NOT NULL,
+    phone   VARCHAR(20)           NOT NULL,
+    retired BOOLEAN DEFAULT FALSE NOT NULL,
     intern  BOOLEAN DEFAULT FALSE NOT NULL,
     CONSTRAINT pk_employees PRIMARY KEY (id)
 );
