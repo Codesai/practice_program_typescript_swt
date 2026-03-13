@@ -1,7 +1,7 @@
 import {Employee} from "../../domain/Employee";
 import {EmployeesRepository, GettingEmployeesError} from "../../domain/EmployeesRepository";
-import mariadb from "mariadb";
 import {DbConnectionOptions} from "./DbConnectionOptions";
+import {createConnection} from "mariadb";
 
 export class MariaDbEmployeesRepository implements EmployeesRepository {
     private readonly dbConnectionOptions: DbConnectionOptions;
@@ -11,7 +11,7 @@ export class MariaDbEmployeesRepository implements EmployeesRepository {
     }
 
     async getAll(): Promise<Employee[]> {
-        const connection = await mariadb.createConnection(this.dbConnectionOptions);
+        const connection = await createConnection(this.dbConnectionOptions);
         try {
             const rows = await connection.query<EmployeeData[]>("SELECT name, phone FROM employees");
             return rows.map(row => new Employee(row.name, row.phone));

@@ -1,28 +1,45 @@
-import {Connection} from "mariadb";
+import {DatabaseConnection} from "../setup/DatabaseConnection";
 
-export function getEmployeesInDb(connection: Connection): EmployeesInDb {
-    return new EmployeesInDb(connection);
+export function employeesInDb(): EmployeesInDb {
+    return new EmployeesInDb();
 }
 
-export class EmployeesInDb {
+class EmployeesInDb {
 
-    private readonly connection: Connection;
+    async addEmployee({name, phone}: {
+        name: string,
+        phone: string
+    }): Promise<void> {
+        await this.add({name, phone, retired: false, intern: false});
+    };
 
-    constructor(connection: Connection) {
-        this.connection = connection;
-    }
+    async addRetired({name, phone}: {
+        name: string,
+        phone: string
+    }): Promise<void> {
+        await this.add({name, phone, retired: true, intern: false});
+    };
 
-    async add({name, phone, retired, intern}: {
+    async addIntern({name, phone}: {
+        name: string,
+        phone: string
+    }): Promise<void> {
+        await this.add({name, phone, retired: false, intern: true});
+    };
+
+    private async add({name, phone, retired, intern}: {
         name: string,
         phone: string,
         retired: boolean,
         intern: boolean
     }): Promise<void> {
-        await this.connection.query("INSERT INTO employees(name, phone, retired, intern)\n" +
+        const connection = DatabaseConnection.create();
+        await connection.query("INSERT INTO employees(name, phone, retired, intern)\n" +
             "VALUES (?, ?, ?, ?);", [name, phone, retired, intern]);
     }
 
     async drop(): Promise<void> {
-        await this.connection.query("DELETE FROM employees;");
+        const connection = DatabaseConnection.create();
+        await connection.query("DELETE FROM employees;");
     }
 }

@@ -8,12 +8,7 @@ import {InspirationController} from "./infrastructure/web/InspirationController"
 import {createInspirationApp} from "./infrastructure/web/app";
 
 const employeesRepository = new MariaDbEmployeesRepository(
-    new DbConnectionOptions(
-        process.env.DB_HOST || 'some_host',
-        process.env.DB_USER || 'some_user',
-        process.env.DB_PASSWORD || 'lalala',
-        process.env.DB_NAME || 'employees_db'
-    )
+    new DbConnectionOptions(process.env.DB_HOST || 'some_host', process.env.DB_USER || 'some_user', process.env.DB_PASSWORD || 'lalala', process.env.DB_NAME || 'employees_db', 3306)
 );
 
 const quotesGateway = new FetchQuotesGateway();

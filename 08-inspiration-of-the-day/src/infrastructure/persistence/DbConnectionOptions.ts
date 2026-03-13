@@ -3,18 +3,27 @@ export class DbConnectionOptions {
     readonly user: string;
     readonly password: string;
     readonly database: string;
+    private port: number;
 
-    constructor(host: string, user: string, password: string, database: string) {
-        validate(host, user, password, database);
+    constructor(host: string, user: string, password: string, database: string, port: number) {
+        validate(host, port, user, password, database);
         this.host = host;
+        this.port = port;
         this.user = user;
         this.password = password;
         this.database = database;
     }
 }
 
-function validate(host: string, user: string, password: string, database: string): void {
+function validatePort(port: number) {
+    if (!Number.isInteger(port) || port < 0) {
+        throw new Error('Host cannot be null or empty');
+    }
+}
+
+function validate(host: string, port: number, user: string, password: string, database: string): void {
     validateHost(host);
+    validatePort(port);
     validateUser(user);
     validatePassword(password);
     validateDatabase(database);

@@ -1,6 +1,5 @@
 import {StartedMariaDbContainer} from "@testcontainers/mariadb";
 import {StartedNetwork} from "testcontainers";
-import {DatabaseConnection} from "./DatabaseConnection";
 
 export class SharedState {
 
@@ -9,15 +8,14 @@ export class SharedState {
         myGlobal.__SHOPPING_CART__ = {
             dbContainer: startedDbContainer,
             networkContainer: startedNetwork,
-            dbConnection: new DatabaseConnection(
-                Object.assign({}, dbConfig, {
-                    port: startedDbContainer.getMappedPort(dbConfig.port),
-                }))
+            dbConfig: Object.assign({}, dbConfig, {
+                port: startedDbContainer.getMappedPort(dbConfig.port),
+            })
         };
     }
 
-    static getDbConnection(): DatabaseConnection {
-        return this.getGlobalState().dbConnection;
+    static getDbConfig(): { host: string; port: number; database: string; user: string; password: string } {
+        return this.getGlobalState().dbConfig;
     }
 
     static getStartedDbContainer(): StartedMariaDbContainer {

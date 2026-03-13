@@ -1,7 +1,7 @@
 {
-  "name": "07-inspiration-of-the-day",
+  "name": "inspiration-of-the-day",
   "version": "1.0.0",
-  "description": "",
+  "description": "Inspiration of the day",
   "main": "build/index.js",
   "devDependencies": {
     "@babel/core": "^7.18.10",
