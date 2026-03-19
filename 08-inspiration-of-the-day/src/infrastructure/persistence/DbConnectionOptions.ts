@@ -3,7 +3,7 @@ export class DbConnectionOptions {
     readonly user: string;
     readonly password: string;
     readonly database: string;
-    private port: number;
+    readonly port: number;
 
     constructor(host: string, user: string, password: string, database: string, port: number) {
         validate(host, port, user, password, database);
