@@ -20,6 +20,6 @@ describe('MariaDbEmployeesRepository', () => {
         await connection.close();
     });
 
-    test.todo('MariaDbEmployeesRepository tests should be implemented');
+    test.todo('tests should be implemented');
 
 });
