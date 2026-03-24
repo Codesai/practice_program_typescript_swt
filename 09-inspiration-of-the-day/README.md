@@ -14,3 +14,6 @@ so that that employee gets inspired and motivated by the manager.
 ### Constraints
 
 The entry point of the service only has this public method: `inspireSomeone(word: string): void;`
+
+### Hints
+- Use the `msw` library for testing HTTP requests to the quote's web service, (see [example](https://gist.github.com/franreyes/4cc595ce04897453ea2a876c8f5bf34d)).

@@ -22,12 +22,12 @@ module.exports = {
             displayName: 'all',
             testMatch: ['**/*.spec.ts'],
             globalSetup: '<rootDir>/tests/infrastructure/integration/persistence/setup/Setup.ts',
-            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts',
+            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts'
         },
         {
             displayName: 'unit',
             testMatch: [
-                '**/*.spec.ts',
+                '**/*.spec.ts'
             ],
             testPathIgnorePatterns: ['<rootDir>/tests/infrastructure/integration/']
         },
@@ -36,18 +36,24 @@ module.exports = {
             displayName: 'integration',
             testMatch: ['<rootDir>/tests/infrastructure/integration/**/*.spec.ts'],
             globalSetup: '<rootDir>/tests/infrastructure/integration/persistence/setup/Setup.ts',
-            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts',
+            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts'
         },
         {
             ...transformIgnorePatterns,
             displayName: 'persistence',
             testMatch: ['<rootDir>/tests/infrastructure/integration/persistence/*.spec.ts'],
             globalSetup: '<rootDir>/tests/infrastructure/integration/persistence/setup/Setup.ts',
-            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts',
+            globalTeardown: '<rootDir>/tests/infrastructure/integration/persistence/setup/Teardown.ts'
         },
         {
+            ...transformIgnorePatterns,
             displayName: 'web',
-            testMatch: ['<rootDir>/tests/infrastructure/integration/web/*.spec.ts'],
+            testMatch: ['<rootDir>/tests/infrastructure/integration/web/*.spec.ts']
+        },
+        {
+            ...transformIgnorePatterns,
+            displayName: 'gateways',
+            testMatch: ['<rootDir>/tests/infrastructure/integration/gateways/*.spec.ts']
         }
     ]
 };

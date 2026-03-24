@@ -36,17 +36,19 @@
   "scripts": {
     "compile": "tsc --project tsconfig.json",
     "typecheck:test": "tsc --project tsconfig.test.json --noEmit",
-    "test": "npm run typecheck:test && npm run test:unit && npm run test:integration",
+    "test": "npm run typecheck:test && jest --selectProjects unit integration --runInBand",
     "test:unit": "jest --selectProjects unit",
     "test:fast": "npm run test:unit",
     "test:integration": "jest --selectProjects integration --runInBand",
     "test:persistence": "jest --selectProjects persistence --runInBand",
     "test:web": "jest --selectProjects web --runInBand",
+    "test:gateways": "jest --selectProjects gateways --runInBand --passWithNoTests",
     "test:unit_watch": "jest --selectProjects unit --watch",
     "test:coverage": "npm run typecheck:test && jest --selectProjects all --coverage",
     "test:mutants": "stryker run",
     "test:fast-mutants": "stryker run stryker-fast.conf.json",
     "test:persistence-mutants": "stryker run stryker-persistence.conf.json",
-    "test:web-mutants": "stryker run stryker-web.conf.json"
+    "test:web-mutants": "stryker run stryker-web.conf.json",
+    "test:gateways-mutants": "stryker run stryker-gateways.conf.json"
   }
 }

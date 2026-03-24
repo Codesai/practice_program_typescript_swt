@@ -6,14 +6,13 @@
   "timeoutMS": 2000,
   "testRunner": "command",
   "commandRunner": {
-    "command": "npm run test:fast"
+    "command": "npm run test:gateways"
   },
   "ignorePatterns": [
     ".idea",
     "reports"
   ],
   "mutate": [
-    "src/**/*.ts",
-    "!src/infrastructure/persistence/**/*.ts"
+    "src/infrastructure/FetchQuotesGateway.ts"
   ]
 }
